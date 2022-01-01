@@ -20,8 +20,13 @@ class App {
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    container.appendChild(this.renderer, domElement);
+    container.appendChild(this.renderer.domElement);
     this.renderer.setAnimationLoop(this.render.bind(this));
+
+    const geometry = new THREE.BoxBufferGeometry();
+    const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+    this.mesh = new THREE.Mesh(geometry, material);
+    this.scene.add(this.mesh);
 
     window.addEventListener("resize", this.resize.bind(this));
   }
